@@ -1,12 +1,10 @@
-cff-version: 1.2.0
-type: article
-message: "If you use this classification system, please cite it as below."
-authors:
-- family-names: "Sustainable Mobility and Safety Research Group"
-  given-names: "Monash University"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-title: "Bicycling infrastructure classification using OSM"
-date-released: 2023-08-17
-url: ""
-
-
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Sustainable Mobility and Safety Research Group"
+    given-names: "Monash University"
+  title: "Bicycling infrastructure classification using OpenStreetMap"
+  issue: 1
+  volume: 1
+  year: 2023
+  url: ""
