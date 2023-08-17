@@ -1,5 +1,6 @@
 preferred-citation:
-  type: unpublished
+  type: techreport
+  institution: Sustainable Mobility and Safety Research Group, Monash University
   authors:
   - family-names: "Sustainable Mobility and Safety Research Group"
     given-names: "Monash University"
