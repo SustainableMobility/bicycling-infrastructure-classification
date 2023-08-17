@@ -1,10 +1,8 @@
 preferred-citation:
-  type: article
+  type: unpublished
   authors:
   - family-names: "Sustainable Mobility and Safety Research Group"
     given-names: "Monash University"
   title: "Bicycling infrastructure classification using OpenStreetMap"
-  issue: 1
-  volume: 1
   year: 2023
-  url: ""
+  url: "https://github.com/SustainableMobility/bicycling-infrastructure-classification"
