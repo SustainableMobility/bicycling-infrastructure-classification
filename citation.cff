@@ -2,8 +2,8 @@ preferred-citation:
   type: techreport
   institution: Sustainable Mobility and Safety Research Group, Monash University
   authors:
-  - family-names: "Sustainable Mobility and Safety Research Group"
-    given-names: "Monash University"
+  - family-names: "Sustainable Mobility and Safety Research Group, Monash University"
+    given-names: ""
   title: "Bicycling infrastructure classification using OpenStreetMap"
   year: 2023
   url: "https://github.com/SustainableMobility/bicycling-infrastructure-classification"
