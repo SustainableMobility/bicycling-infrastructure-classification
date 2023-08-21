@@ -20,5 +20,16 @@ For any queries, please contact Assoc Prof Ben Beck (Head of SMSR, ben.beck@mona
 If you are using this classification system for your work, we strongly recommend citing this repository using the 'Cite this repository' feature on GitHub (found on the right side when you open the repo). 
 Alternatively, you may use the guidelines provided [here](https://www.ilovephd.com/how-do-you-cite-a-github-repository/).
 
+### BibTeX
+>@misc{Sustainable_Mobility_and_Safety_Research_Group_Bicycling_infrastructure_classification_2023,
+author = {Sustainable Mobility and Safety Research Group, Monash University},
+title = {{Bicycling infrastructure classification using OpenStreetMap}},
+url = {https://github.com/SustainableMobility/bicycling-infrastructure-classification},
+year = {2023}
+}
+>
+### APA
+>Sustainable Mobility and Safety Research Group, Monash University. (2023). Bicycling infrastructure classification using OpenStreetMap. https://github.com/SustainableMobility/bicycling-infrastructure-classification
+
 _Note: OSM is a volunteered geographic information and is prone to occasional completeness and correctness issues, especially in the case of bicycling infrastructure due to inconsistent tagging practices. This can lead to occasional misclassification, especially if directly translated to other study areas, especially outside Australia._
 
