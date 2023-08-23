@@ -35,6 +35,7 @@ Alternatively, you may use the guidelines provided [here](https://www.ilovephd.c
 author = {Sustainable Mobility and Safety Research Group, Monash University},
 title = {{Bicycling infrastructure classification using OpenStreetMap}},
 url = {https://github.com/SustainableMobility/bicycling-infrastructure-classification},
+doi = {http://dx.doi.org/10.5281/zenodo.8274978},
 year = {2023}
 }
 >
