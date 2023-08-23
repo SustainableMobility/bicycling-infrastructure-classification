@@ -1,5 +1,5 @@
-# bicycling-infrastructure-classification
-## Developing a bicycling infrastructure classification system for Greater Melbourne, Australia using OpenStreetMap
+# Developing a bicycling infrastructure classification system for Greater Melbourne, Australia using OpenStreetMap
+## Background
 
 Policy-makers are looking to promote the uptake of bicycling as a healthy mode of travel that reduces the negative effects of traditional motorised transport (physical inactivity, air pollution, traffic congestion) and achieves sustainability goals. 
 As an active form of mobility, bicycling improves physical and mental health and has long-term public health benefits.
