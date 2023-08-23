@@ -41,5 +41,8 @@ year = {2023}
 ### APA
 >Sustainable Mobility and Safety Research Group, Monash University. (2023). Bicycling infrastructure classification using OpenStreetMap. https://github.com/SustainableMobility/bicycling-infrastructure-classification
 
+[![DOI](https://zenodo.org/badge/679530218.svg)](https://zenodo.org/badge/latestdoi/679530218)
+
+
 _Note: OSM is a volunteered geographic information and is prone to occasional completeness and correctness issues, especially in the case of bicycling infrastructure due to inconsistent tagging practices. This can lead to occasional misclassification, especially if directly translated to other study areas, especially outside Australia._
 
