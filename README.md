@@ -32,7 +32,7 @@ Alternatively, you may use the guidelines provided [here](https://www.ilovephd.c
 
 ### BibTeX
 >@misc{Sustainable_Mobility_and_Safety_Research_Group_Bicycling_infrastructure_classification_2023,
-author = {Sustainable Mobility and Safety Research Group, Monash University},
+author = {{Sustainable Mobility and Safety Research Group, Monash University}},
 title = {{Bicycling infrastructure classification using OpenStreetMap}},
 url = {https://github.com/SustainableMobility/bicycling-infrastructure-classification},
 doi = {http://dx.doi.org/10.5281/zenodo.8274978},
