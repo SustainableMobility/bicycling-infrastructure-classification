@@ -12,6 +12,16 @@ Hence, it is used extensively by researchers and planners and it helps develop m
 We, the [Sustainable Mobility and Safety Research Group](https://www.monash.edu/medicine/sphpm/units/traumaepi/sustainable-mobility-and-safety-research-group) (SMSR) at Monash University, Australia, have developed a classification process to classify existing bicycling infrastructure across Greater Melbourne, Australia.
 We have derived knowledge from existing studies and calibrated our classification system to suit local tagging practices.
 
+## Technology
+  * Python
+  * OpenStreetMap
+  * Python packages
+    * [OSMnx](https://osmnx.readthedocs.io/en/stable/user-reference.html)
+    * [NetworkX](https://networkx.org/)
+    * [geojson](https://pypi.org/project/geojson/)
+    * [Shapely](https://shapely.readthedocs.io/en/stable/manual.html)
+    * [Pandas](https://pandas.pydata.org/docs/index.html)
+      
 ## Authors
 The document has been prepared by the Sustainable Mobility and Safety Research (SMSR) Group at Monash University. 
 For any queries, please contact Assoc Prof Ben Beck (Head of SMSR, ben.beck@monash.edu) or Dr Debjit Bhowmick (Research Fellow, debjit.bhowmick@monash.edu).
