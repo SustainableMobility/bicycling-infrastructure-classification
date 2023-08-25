@@ -23,8 +23,8 @@ We have derived knowledge from existing studies and calibrated our classificatio
     * [Pandas](https://pandas.pydata.org/docs/index.html)
       
 ## Authors
-The document has been prepared by the Sustainable Mobility and Safety Research (SMSR) Group at Monash University. 
-For any queries, please contact Assoc Prof Ben Beck (Head of SMSR, ben.beck@monash.edu) or Dr Debjit Bhowmick (Research Fellow, debjit.bhowmick@monash.edu).
+The document has been prepared by **Dr Debjit Bhowmick** and **Assoc Prof Ben Beck** from the Sustainable Mobility and Safety Research (SMSR) Group at Monash University and **Paul Yacoumis** from the Victorian Department of Transport and Planning. 
+For any queries, please contact Dr Debjit Bhowmick (Research Fellow, debjit.bhowmick@monash.edu) or Assoc Prof Ben Beck (Head of SMSR, ben.beck@monash.edu).
 
 ## Citation
 If you are using this classification system for your work, we strongly recommend citing this repository using the 'Cite this repository' feature on GitHub (found on the right side when you open the repo). 
