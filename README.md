@@ -31,17 +31,20 @@ If you are using this classification system for your work, we strongly recommend
 Alternatively, you may use the guidelines provided [here](https://www.ilovephd.com/how-do-you-cite-a-github-repository/).
 
 ### BibTeX
->@misc{Sustainable_Mobility_and_Safety_Research_Group_Bicycling_infrastructure_classification_2023,
+```
+@misc{Sustainable_Mobility_and_Safety_Research_Group_Bicycling_infrastructure_classification_2023,
 author = {{Sustainable Mobility and Safety Research Group, Monash University}},
 title = {{Bicycling infrastructure classification using OpenStreetMap}},
 url = {https://github.com/SustainableMobility/bicycling-infrastructure-classification},
 doi = {http://dx.doi.org/10.5281/zenodo.8274978},
 year = {2023}
 }
+```
 >
 ### APA
->Sustainable Mobility and Safety Research Group, Monash University. (2023). Bicycling infrastructure classification using OpenStreetMap. https://github.com/SustainableMobility/bicycling-infrastructure-classification
-
+```
+Sustainable Mobility and Safety Research Group, Monash University. (2023). Bicycling infrastructure classification using OpenStreetMap. https://github.com/SustainableMobility/bicycling-infrastructure-classification
+```
 [![DOI](https://zenodo.org/badge/679530218.svg)](https://zenodo.org/badge/latestdoi/679530218)
 
 
