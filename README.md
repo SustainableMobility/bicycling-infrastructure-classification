@@ -21,6 +21,11 @@ We have derived knowledge from existing studies and calibrated our classificatio
     * [geojson](https://pypi.org/project/geojson/)
     * [Shapely](https://shapely.readthedocs.io/en/stable/manual.html)
     * [Pandas](https://pandas.pydata.org/docs/index.html)
+   
+## How to implement in Python
+  * Install the aforementioned Python packages as described in the links.
+  * A settings.py file has been provided. This file contains a more holistic set of OSM tags that are not retrieved by default by OSMnx. Copy the contents of this file into your settings.py file under your osmnx folder/installation. Otherwise, the code will throw KeyError.
+  * Run the Python codes provided.
       
 ## Authors
 The document has been prepared by **Dr Debjit Bhowmick** and **Assoc Prof Ben Beck** from the Sustainable Mobility and Safety Research (SMSR) Group at Monash University and **Paul Yacoumis** from the Victorian Department of Transport and Planning. 
