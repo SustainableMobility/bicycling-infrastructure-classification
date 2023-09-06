@@ -27,6 +27,25 @@ We have derived knowledge from existing studies and calibrated our classificatio
   * A settings.py file has been provided. This file contains a more holistic set of OSM tags that are not retrieved by default by OSMnx. Copy the contents of this file into your settings.py file under your osmnx folder/installation. Otherwise, the code will throw KeyError.
   * Run the Python codes provided.
       
+## Sample results
+*Distribution of different types of bicycling infrastructure at the link-level in Greater Melbourne.*
+
+<p align="center">
+  <img width="624" height="606" src="https://github.com/SustainableMobility/bicycling-infrastructure-classification/blob/main/GitHub_bikeinfra_GMEL.PNG?raw=true">
+</p>
+
+*Distribution of bike paths and protected bike lanes in Inner Melbourne.*
+
+<p align="center">
+  <img width="624" height="606" src="https://github.com/SustainableMobility/bicycling-infrastructure-classification/blob/main/GitHub_bikeinfra_InnerMelbourne.PNG?raw=true">
+</p>
+
+*Distribution of bike paths and protected bike lanes in Inner Melbourne.*
+
+<p align="center">
+  <img width="624" height="606" src="https://github.com/SustainableMobility/bicycling-infrastructure-classification/blob/main/GitHub_bikeinfra_bikepathANDprotectedlane_InnerMelbourne.PNG?raw=true">
+</p>
+
 ## Authors
 The document has been prepared by **Dr Debjit Bhowmick** and **Assoc Prof Ben Beck** from the Sustainable Mobility and Safety Research (SMSR) Group at Monash University and **Paul Yacoumis** from the Victorian Department of Transport and Planning. 
 For any queries, please contact Dr Debjit Bhowmick (Research Fellow, debjit.bhowmick@monash.edu) or Assoc Prof Ben Beck (Head of SMSR, ben.beck@monash.edu).
