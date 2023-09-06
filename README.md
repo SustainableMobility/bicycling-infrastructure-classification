@@ -34,7 +34,7 @@ We have derived knowledge from existing studies and calibrated our classificatio
   <img width="624" height="606" src="https://github.com/SustainableMobility/bicycling-infrastructure-classification/blob/main/GitHub_bikeinfra_GMEL.PNG?raw=true">
 </p>
 
-*Distribution of bike paths and protected bike lanes in Inner Melbourne.*
+*Distribution of different types of bicycling infrastructure at the link-level in Inner Melbourne.*
 
 <p align="center">
   <img width="624" height="606" src="https://github.com/SustainableMobility/bicycling-infrastructure-classification/blob/main/GitHub_bikeinfra_InnerMelbourne.PNG?raw=true">
