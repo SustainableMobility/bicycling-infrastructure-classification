@@ -6,6 +6,7 @@ Created on Thu Jul 20 11:34:28 2023
 """
 
 #%% Step: Import modules
+import geopandas as gpd
 import osmnx as ox
 import networkx as nx
 from shapely.geometry import shape
@@ -16,9 +17,18 @@ import pandas as pd
 import numpy as np
 import math
 import time
+from pathlib import Path
+# from gpx_converter import Converter
+# from leuvenmapmatching.util.gpx import gpx_to_path
+import pyproj
+# import functions
 pd.set_option('display.max_columns', 500)
 import warnings
 warnings.filterwarnings('ignore')
+import ast
+
+import sys, os, os.path
+os.environ['HTTP_PROXY'] = 'serp-proxy.erc.monash.edu:3128'
 
 #%% Step: Import boundary data
 #Convert study area polygon to shapely multipolygon
@@ -67,6 +77,8 @@ G_edges.loc[G_edges['highway'].isin(['footway','pedestrian','path']) & ~G_edges[
 
 ###PROTECTED BIKELANE
 G_edges.loc[~G_edges['highway'].isin(['cycleway']) & (G_edges['cycleway'].isin(['track','opposite_track']) | G_edges['cycleway:left'].isin(['track']) | G_edges['cycleway:right'].isin(['track']) | G_edges['cycleway:both'].isin(['track'])) & G_edges['bike_inf_smsr'].isin(['1. mixed traffic']), 'bike_inf_smsr'] = '7. protected bikelane'
+#added for st kilda rd protected lanes
+G_edges.loc[G_edges['highway'].isin(['cycleway']) & (G_edges['name'].str.contains("Road|Street")==True), 'bike_inf_smsr'] = '7. protected bikelane'
 
 ###BUFFERED BIKELANE (BOTH SIDES)
 G_edges.loc[G_edges['cycleway:both'].isin(['lane'])
@@ -144,7 +156,47 @@ G_edges.loc[G_edges['cycleway:both'].isin(['shoulder']) & G_edges['bike_inf_smsr
 G_edges.loc[G_edges['cycleway:left'].isin(['shoulder']) & G_edges['bike_inf_smsr'].isin(['1. mixed traffic']), 'bike_inf_smsr'] = '2. shoulder cyclable'
 
 
-G_edges['bike_inf_smsr'].value_counts().sort_index()
+###OTHERS
+## roads which have associated bike lanes (usually protected) which are mapped separately, should not be classified as mixed traffic.
+## However, it is not trivial to detect the associated bike lane/infrastructure type.
+## Also, given that infrastructure is separately mapped and is classified already, it could cause duplication issues.
+## Thus, we have decided to classify roads with associated bike infra mapped separately in a new category '0b. Associated bike infrastructure separately mapped'
+
+G_edges.loc[G_edges['cycleway'].isin(['separate']) & G_edges['bike_inf_smsr'].isin(['1. mixed traffic']), 'bike_inf_smsr'] = '0b. Associated bike infrastructure separately mapped'
+
+print()
+print('Number of edges by infrastructure type')
+print(G_edges['bike_inf_smsr'].value_counts().sort_index())
+print()
+print('Total length in kms by infrastructure type')
+print(G_edges[['length','bike_inf_smsr']].groupby(['bike_inf_smsr']).sum()/1000)
+#%%
+###ASSIGN BIKE INFRA SUPERCLASS
+
+G_edges['bike_inf_superclass'] = ''
+
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['9. dedicated bikepath']), 'bike_inf_superclass'] = 'dedicated bikepath'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['8b. shared bikepath']), 'bike_inf_superclass'] = 'shared bikepath'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['8a. pedestrian path/street with cycling allowed']), 'bike_inf_superclass'] = 'pedestrian path/street with cycling allowed'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['7. protected bikelane']), 'bike_inf_superclass'] = 'protected bikelane'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['6a. buffered bikelane (kerb-side)','6b. buffered bikelane (road-side)','6c. buffered lane (both sides)']), 'bike_inf_superclass'] = 'buffered bikelane'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['5d. painted bikelane (single side)','5e. painted bikelane']), 'bike_inf_superclass'] = 'painted bikelane'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['5b. advisory bikelane (single side)','5c. advisory bikelane']), 'bike_inf_superclass'] = 'advisory bikelane'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['5a. peak hour advisory bikelane','5a. peak hour advisory bikelane (single side)','5a. peak hour painted bikelane','5a. peak hour painted bikelane (single side)']), 'bike_inf_superclass'] = 'peak hour bikelane'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['4b. sharrow']), 'bike_inf_superclass'] = 'sharrow'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['4a. shared zone']), 'bike_inf_superclass'] = 'shared zone'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['3. bus lane with cycling allowed']), 'bike_inf_superclass'] = 'bus lane with cycling allowed'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['2. shoulder cyclable']), 'bike_inf_superclass'] = 'shoulder cyclable'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['0a. bicyclists dismount','0b. pedestrian path/street with cycling not allowed']), 'bike_inf_superclass'] = 'bicycling not allowed'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['1. mixed traffic']), 'bike_inf_superclass'] = 'mixed traffic'
+G_edges.loc[G_edges['bike_inf_smsr'].isin(['0b. Associated bike infrastructure separately mapped']), 'bike_inf_superclass'] = 'Associated bike infrastructure separately mapped'
+
+print()
+print('Number of edges by infrastructure type')
+print(G_edges['bike_inf_superclass'].value_counts().sort_index())
+print()
+print('Total length in kms by infrastructure type')
+print(G_edges[['length','bike_inf_superclass']].groupby(['bike_inf_superclass']).sum()/1000)
 
 #%% Step: Compose graph from modified geodataframes, project graph if necessary (for mapmatching) and save in desired format 
       
@@ -164,14 +216,14 @@ for n1, n2, d in G.edges(data=True):
 
 ##Save in desired format
 # G_edges.to_csv('COM_edges_with_bike_infra_class_dtp_smsr_ecf.csv')
-G_edges.to_csv('GMEL_edges_with_bike_infra_class_dtp_smsr_ecf.csv')
+# G_edges.to_csv('GMEL_edges_with_bike_infra_class_smsr.csv')
 # ox.io.save_graph_geopackage(G, filepath = 'GMEL_bikeinfra_smsr_dtp_ecf.gpkg', directed=True)
 # ox.io.save_graph_geopackage(G_proj, filepath = 'GMEL_bikeinfra_smsr_dtp_ecf_32755.gpkg')
-ox.io.save_graph_geopackage(G, filepath = 'GMEL_bikeinfra_smsr_dtp_ecf.gpkg', directed=True)
+ox.io.save_graph_geopackage(G, filepath = 'GMEL_bikeinfra_smsr_v2.gpkg', directed=True)
 # ox.io.save_graph_geopackage(G_proj, filepath = 'COM_bikeinfra_smsr_dtp_ecf_32755.gpkg')
 # ox.osm_xml.save_graph_xml(G_simplified, filepath = 'graph_used.osm')
 # ox.osm_xml.save_graph_xml(G_proj, filepath = 'graph_used_projected.osm')
-# ox.io.save_graph_shapefile(G_simplified, filepath = 'graph_used_shapefile_simplified_latest')
+# ox.io.save_graph_shapefile(G, filepath = 'GMEL_edges_with_bike_infra_class_smsr')
 # ox.io.save_graph_shapefile(G_proj, filepath = 'graph_used_shapefile_simplified_latest_projected')
 
 #%%
