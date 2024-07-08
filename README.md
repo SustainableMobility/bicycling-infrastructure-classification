@@ -12,6 +12,12 @@ Hence, it is used extensively by researchers and planners and it helps develop m
 We, the [Sustainable Mobility and Safety Research Group](https://www.monash.edu/medicine/sphpm/units/traumaepi/sustainable-mobility-and-safety-research-group) (SMSR) at Monash University, Australia, have developed a classification process to classify existing bicycling infrastructure across Greater Melbourne, Australia.
 We have derived knowledge from existing studies and calibrated our classification system to suit local tagging practices.
 
+## Update
+
+1. Roads which have associated bike lanes (usually protected) which are mapped separately by OSM contributors, should not be classified as mixed traffic (as was the case in the earlier version). Thus, we have decided to classify roads with associated bike infra mapped separately in a new category '0b. Associated bike infrastructure separately mapped'. However, it is not trivial to detect the associated bike lane/infrastructure type. Also, given that infrastructure is separately mapped and is classified already, it could cause duplication issues.
+2. Some protected bike lanes (e.g. along St Kilda Road) were getting incorrectly classified as 'Dedicated bikepaths' given that they are mapped separately to the associated road in OSM. We can now classify such instances correctly.
+3. We have also added a 'superclass' classification, which is a less granular classification, and clubs together similar but separate classes from the more granular classification system.
+
 ## Technology
   * Python
   * OpenStreetMap
