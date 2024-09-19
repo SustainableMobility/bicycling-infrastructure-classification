@@ -57,8 +57,8 @@ The document has been prepared by **Dr Debjit Bhowmick** and **Assoc Prof Ben Be
 For any queries, please contact Dr Debjit Bhowmick (Research Fellow, debjit.bhowmick@monash.edu) or Assoc Prof Ben Beck (Head of SMSR, ben.beck@monash.edu).
 
 ## Citation
-If you are using this classification system for your work, we strongly recommend citing this repository using the 'Cite this repository' feature on GitHub (found on the right side when you open the repo). 
-Alternatively, you may use the guidelines provided [here](https://www.ilovephd.com/how-do-you-cite-a-github-repository/).
+If you are using this classification system for your work, we strongly recommend citing this repository. 
+You may refer to the guidelines provided [here](https://www.ilovephd.com/how-do-you-cite-a-github-repository/).
 
 ### BibTeX
 ```
