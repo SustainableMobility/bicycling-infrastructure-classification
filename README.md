@@ -66,7 +66,7 @@ Alternatively, you may use the guidelines provided [here](https://www.ilovephd.c
 author = {{Sustainable Mobility and Safety Research Group, Monash University}},
 title = {{Bicycling infrastructure classification using OpenStreetMap}},
 url = {https://github.com/SustainableMobility/bicycling-infrastructure-classification},
-doi = {http://dx.doi.org/10.5281/zenodo.8274978},
+doi = {https://doi.org/10.6084/m9.figshare.27059983.v1},
 year = {2023}
 }
 ```
@@ -75,7 +75,7 @@ year = {2023}
 ```
 Sustainable Mobility and Safety Research Group, Monash University. (2023). Bicycling infrastructure classification using OpenStreetMap. https://github.com/SustainableMobility/bicycling-infrastructure-classification
 ```
-[![DOI](https://zenodo.org/badge/679530218.svg)](https://zenodo.org/badge/latestdoi/679530218)
+[![DOI](https://zenodo.org/badge/679530218.svg)](https://doi.org/10.6084/m9.figshare.27059983.v1)
 
 
 _Note: OSM is a volunteered geographic information and is prone to occasional completeness and correctness issues, especially in the case of bicycling infrastructure due to inconsistent tagging practices. This can lead to occasional misclassification, especially if directly translated to other study areas, especially outside Australia._
