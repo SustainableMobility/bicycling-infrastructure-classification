@@ -1,0 +1,5 @@
+geojson==3.2.0
+matplotlib==3.10.3
+munkres==1.1.4
+rasterio==1.4.3
+zstandard==0.23.0
