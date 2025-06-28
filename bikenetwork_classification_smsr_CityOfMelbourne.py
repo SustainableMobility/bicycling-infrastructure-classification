@@ -7,6 +7,8 @@ Created on Thu Jul 20 11:34:28 2023
 
 #%% Step: Import modules
 import geopandas as gpd
+import os
+os.environ['PROJ_LIB'] = r"C:\Users\dbho0002\miniconda3\envs\bikeinfra\Library\share\proj"
 import osmnx as ox
 import networkx as nx
 from shapely.geometry import shape
@@ -19,7 +21,7 @@ import math
 import time
 from pathlib import Path
 # from gpx_converter import Converter
-from leuvenmapmatching.util.gpx import gpx_to_path
+# from leuvenmapmatching.util.gpx import gpx_to_path
 import pyproj
 # import functions
 pd.set_option('display.max_columns', 500)
@@ -27,10 +29,25 @@ import warnings
 warnings.filterwarnings('ignore')
 import ast
 
-import sys, os, os.path
-os.environ['HTTP_PROXY'] = 'serp-proxy.erc.monash.edu:3128'
+# import sys, os, os.path
+# os.environ['HTTP_PROXY'] = 'serp-proxy.erc.monash.edu:3128'
+
+from datetime import datetime
+
+# Create log folder and file
+os.makedirs("log", exist_ok=True)
+log_path = "log/bikeinfra_log.txt"
+
+def log_step(msg):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    full_msg = f"[{timestamp}] {msg}"
+    print(full_msg)
+    with open(log_path, "a", encoding="utf-8") as f:
+        f.write(full_msg + "\n")
+
 
 #%% Step: Import boundary data
+log_step("Step: Import boundary data")
 #Convert study area polygon to shapely multipolygon
 # with open('GreaterMelbourne_polygon.geojson') as f:
 #     gj = geojson.load(f)
@@ -41,6 +58,7 @@ with open('CityOfMelbourne_municipal-boundary.geojson') as f:
 polygon = shape(gj['features'][0]['geometry']) ##varies across sources from where boundary file is obtained
 
 #%% Step: Import graphs and join
+log_step("Step: Import graphs and join")
 
 bike_filter_1 = '[~"highway"~"cycleway|trunk|primary|secondary|tertiary|unclassified|residential|primary_link|secondary_link|tertiary_link|living_street|trailhead|service"]["access"!~"no|private"]["bicycle"!~"no"]["area"!~"yes"]'
 G1 = ox.graph.graph_from_polygon(polygon, custom_filter = bike_filter_1, simplify = False, retain_all=True)
@@ -53,6 +71,7 @@ G = nx.compose(G1, G2)
 G_nodes, G_edges = ox.graph_to_gdfs(G, nodes=True, edges=True)
 
 #%% Modified SMSR classification
+log_step("Step: Execute SMSR bike infra classification")
 
 G_edges['bike_inf_smsr'] = '1. mixed traffic'
 
@@ -164,12 +183,12 @@ G_edges.loc[G_edges['cycleway:left'].isin(['shoulder']) & G_edges['bike_inf_smsr
 
 G_edges.loc[G_edges['cycleway'].isin(['separate']) & G_edges['bike_inf_smsr'].isin(['1. mixed traffic']), 'bike_inf_smsr'] = '0b. Associated bike infrastructure separately mapped'
 
-print()
-print('Number of edges by infrastructure type')
-print(G_edges['bike_inf_smsr'].value_counts().sort_index())
-print()
-print('Total length in kms by infrastructure type')
-print(G_edges[['length','bike_inf_smsr']].groupby(['bike_inf_smsr']).sum()/1000)
+# print()
+# print('Number of edges by infrastructure type')
+# print(G_edges['bike_inf_smsr'].value_counts().sort_index())
+# print()
+# print('Total length in kms by infrastructure type')
+# print(G_edges[['length','bike_inf_smsr']].groupby(['bike_inf_smsr']).sum()/1000)
 #%%
 ###ASSIGN BIKE INFRA SUPERCLASS
 
@@ -191,19 +210,20 @@ G_edges.loc[G_edges['bike_inf_smsr'].isin(['0a. bicyclists dismount','0b. pedest
 G_edges.loc[G_edges['bike_inf_smsr'].isin(['1. mixed traffic']), 'bike_inf_superclass'] = 'mixed traffic'
 G_edges.loc[G_edges['bike_inf_smsr'].isin(['0b. Associated bike infrastructure separately mapped']), 'bike_inf_superclass'] = 'Associated bike infrastructure separately mapped'
 
-print()
-print('Number of edges by infrastructure type')
-print(G_edges['bike_inf_superclass'].value_counts().sort_index())
-print()
-print('Total length in kms by infrastructure type')
-print(G_edges[['length','bike_inf_superclass']].groupby(['bike_inf_superclass']).sum()/1000)
+# print()
+# print('Number of edges by infrastructure type')
+# print(G_edges['bike_inf_superclass'].value_counts().sort_index())
+# print()
+# print('Total length in kms by infrastructure type')
+# print(G_edges[['length','bike_inf_superclass']].groupby(['bike_inf_superclass']).sum()/1000)
 #%%
 
 # test = G_edges[G_edges['name'].str.contains("St Kilda Road")==True]
 
-#%% Step: Compose graph from modified geodataframes, project graph if necessary (for mapmatching) and save in desired format 
+#%% Step: Compose graph from modified geodataframes, project graph if necessary (for mapmatching) and save in desired format
+log_step("Step: Compose graph and save outputs")
       
-G = ox.utils_graph.graph_from_gdfs(G_nodes, G_edges)
+G = ox.convert.graph_from_gdfs(G_nodes, G_edges)
 
 att_list = ['geometry']
 for n1, n2, d in G.edges(data=True):
@@ -217,31 +237,83 @@ for n1, n2, d in G.edges(data=True):
 ##Project graph if necessary
 # G_proj = ox.project_graph(G, to_crs={'init':'epsg:32755'})
 
+import os
+
+# Ensure output folder exists
+os.makedirs("output", exist_ok=True)
+
 ##Save in desired format
-# G_edges.to_csv('COM_edges_with_bike_infra_class_dtp_smsr_ecf.csv')
-G_edges.to_csv('COM_edges_with_bike_infra_class_smsr_v2.csv')
-# ox.io.save_graph_geopackage(G, filepath = 'GMEL_bikeinfra_smsr_dtp_ecf.gpkg', directed=True)
-# ox.io.save_graph_geopackage(G_proj, filepath = 'GMEL_bikeinfra_smsr_dtp_ecf_32755.gpkg')
-ox.io.save_graph_geopackage(G, filepath = 'COM_bikeinfra_smsr_v2.gpkg', directed=True)
-# ox.io.save_graph_geopackage(G_proj, filepath = 'COM_bikeinfra_smsr_dtp_ecf_32755.gpkg')
-# ox.osm_xml.save_graph_xml(G_simplified, filepath = 'graph_used.osm')
-# ox.osm_xml.save_graph_xml(G_proj, filepath = 'graph_used_projected.osm')
-# ox.io.save_graph_shapefile(G_simplified, filepath = 'graph_used_shapefile_simplified_latest')
-# ox.io.save_graph_shapefile(G_proj, filepath = 'graph_used_shapefile_simplified_latest_projected')
+# G_edges.to_csv('output/COM_edges_with_bike_infra_class_dtp_smsr_ecf.csv')
+G_edges.to_csv('output/COM_edges_with_bike_infra_class_smsr_v2.csv')
+# ox.io.save_graph_geopackage(G, filepath = 'output/COM_bikeinfra_smsr_dtp_ecf.gpkg', directed=True)
+# ox.io.save_graph_geopackage(G_proj, filepath = 'output/COM_bikeinfra_smsr_dtp_ecf_32755.gpkg')
+ox.io.save_graph_geopackage(G, filepath = 'output/COM_bikeinfra_smsr_v2.gpkg', directed=True)
+# ox.io.save_graph_geopackage(G_proj, filepath = 'output/COM_bikeinfra_smsr_dtp_ecf_32755.gpkg')
+# ox.osm_xml.save_graph_xml(G_simplified, filepath = 'output/COM_graph_used.osm')
+# ox.osm_xml.save_graph_xml(G_proj, filepath = 'output/COM_graph_used_projected.osm')
+# ox.io.save_graph_shapefile(G_simplified, filepath = 'output/COM_graph_used_shapefile_simplified_latest')
+# ox.io.save_graph_shapefile(G_proj, filepath = 'output/COM_graph_used_shapefile_simplified_latest_projected')
 
-#%%
+#%% Final stats and plots
+log_step("Step: Compute stats and generate plots")
+import matplotlib.pyplot as plt
 
-stats = G_edges[['length','bike_inf_smsr']].groupby(['bike_inf_smsr']).sum()/1000
-stats['percentage'] = 100*stats['length']/(stats['length'].sum())
+# --- Bike infrastructure SMSR classification ---
+
+stats = G_edges[['length','bike_inf_smsr']].groupby(['bike_inf_smsr']).sum() / 1000
+stats['percentage'] = 100 * stats['length'] / stats['length'].sum()
 stats['length'] = stats['length'].round(0)
 stats['percentage'] = stats['percentage'].round(2)
-stats.to_csv('COM_stats_length_by_infra_v2.csv')
+stats.to_csv('output/COM_stats_length_by_infra_v2.csv')
 
-stats = G_edges[['length','bike_inf_superclass']].groupby(['bike_inf_superclass']).sum()/1000
-stats['percentage'] = 100*stats['length']/(stats['length'].sum())
+# Plot 1: Length by SMSR type
+stats.sort_values('length', inplace=True)
+plt.figure(figsize=(10, 8))
+stats['length'].plot(kind='barh', color='skyblue')
+plt.xlabel('Total Length (km)')
+plt.title('Total Length by Bike Infrastructure Type (SMSR)')
+plt.tight_layout()
+plt.savefig('output/COM_plot_length_by_infra_v2.png')
+plt.close()
+
+# Plot 2: Percentage by SMSR type
+stats.sort_values('percentage', inplace=True)
+plt.figure(figsize=(10, 8))
+stats['percentage'].plot(kind='barh', color='salmon')
+plt.xlabel('Percentage of Total Length (%)')
+plt.title('Percentage by Bike Infrastructure Type (SMSR)')
+plt.tight_layout()
+plt.savefig('output/COM_plot_percentage_by_infra_v2.png')
+plt.close()
+
+# --- Bike infrastructure superclass ---
+
+stats = G_edges[['length','bike_inf_superclass']].groupby(['bike_inf_superclass']).sum() / 1000
+stats['percentage'] = 100 * stats['length'] / stats['length'].sum()
 stats['length'] = stats['length'].round(0)
 stats['percentage'] = stats['percentage'].round(2)
-stats.to_csv('COM_stats_length_by_superclass_v2.csv')
+stats.to_csv('output/COM_stats_length_by_superclass_v2.csv')
+
+# Plot 3: Length by superclass
+stats.sort_values('length', inplace=True)
+plt.figure(figsize=(10, 6))
+stats['length'].plot(kind='barh', color='mediumseagreen')
+plt.xlabel('Total Length (km)')
+plt.title('Total Length by Bike Infrastructure Superclass')
+plt.tight_layout()
+plt.savefig('output/COM_plot_length_by_superclass_v2.png')
+plt.close()
+
+# Plot 4: Percentage by superclass
+stats.sort_values('percentage', inplace=True)
+plt.figure(figsize=(10, 6))
+stats['percentage'].plot(kind='barh', color='orchid')
+plt.xlabel('Percentage of Total Length (%)')
+plt.title('Percentage by Bike Infrastructure Superclass')
+plt.tight_layout()
+plt.savefig('output/COM_plot_percentage_by_superclass_v2.png')
+plt.close()
+
 
 #%%
 
