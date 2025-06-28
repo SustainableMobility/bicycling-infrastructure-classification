@@ -8,7 +8,6 @@ Created on Thu Jul 20 11:34:28 2023
 #%% Step: Import modules
 import geopandas as gpd
 import os
-os.environ['PROJ_LIB'] = r"C:\Users\dbho0002\miniconda3\envs\bikeinfra\Library\share\proj"
 import osmnx as ox
 import networkx as nx
 from shapely.geometry import shape
@@ -20,17 +19,11 @@ import numpy as np
 import math
 import time
 from pathlib import Path
-# from gpx_converter import Converter
-# from leuvenmapmatching.util.gpx import gpx_to_path
 import pyproj
-# import functions
 pd.set_option('display.max_columns', 500)
 import warnings
 warnings.filterwarnings('ignore')
 import ast
-
-# import sys, os, os.path
-# os.environ['HTTP_PROXY'] = 'serp-proxy.erc.monash.edu:3128'
 
 from datetime import datetime
 
