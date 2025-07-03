@@ -1,0 +1,15 @@
+bike_inf_superclass,length,percentage
+Associated bike infrastructure separately mapped,2.0,0.17
+advisory bikelane,7.0,0.59
+bicycling not allowed,3.0,0.3
+buffered bikelane,40.0,3.42
+bus lane with cycling allowed,6.0,0.48
+dedicated bikepath,4.0,0.34
+mixed traffic,762.0,64.65
+painted bikelane,68.0,5.75
+peak hour bikelane,1.0,0.1
+pedestrian path/street with cycling allowed,59.0,5.04
+protected bikelane,39.0,3.31
+shared bikepath,169.0,14.38
+shared zone,4.0,0.33
+sharrow,14.0,1.16
