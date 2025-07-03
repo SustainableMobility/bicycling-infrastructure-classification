@@ -1,0 +1,21 @@
+bike_inf_smsr,length,percentage
+0a. bicyclists dismount,3.0,0.3
+0b. Associated bike infrastructure separately mapped,2.0,0.17
+1. mixed traffic,762.0,64.65
+3. bus lane with cycling allowed,6.0,0.48
+4a. shared zone,4.0,0.33
+4b. sharrow,14.0,1.16
+5a. peak hour advisory bikelane (single side),0.0,0.01
+5a. peak hour painted bikelane,1.0,0.06
+5a. peak hour painted bikelane (single side),0.0,0.02
+5b. advisory bikelane (single side),5.0,0.46
+5c. advisory bikelane,2.0,0.13
+5d. painted bikelane (single side),48.0,4.05
+5e. painted bikelane,20.0,1.7
+6a. buffered bikelane (kerb-side),12.0,0.99
+6b. buffered bikelane (road-side),18.0,1.56
+6c. buffered lane (both sides),10.0,0.87
+7. protected bikelane,39.0,3.31
+8a. pedestrian path/street with cycling allowed,59.0,5.04
+8b. shared bikepath,169.0,14.38
+9. dedicated bikepath,4.0,0.34
