@@ -1,12 +1,12 @@
-# Developing a bicycling infrastructure classification system for Greater Melbourne, Australia using OpenStreetMap
+# Developing a cycling infrastructure classification system for Greater Melbourne, Australia using OpenStreetMap
 ## Background
 
-Policy-makers are looking to promote the uptake of bicycling as a healthy mode of travel that reduces the negative effects of traditional motorised transport (physical inactivity, air pollution, traffic congestion) and achieves sustainability goals. 
+Policy-makers are looking to promote the uptake of cycling as a healthy mode of travel that reduces the negative effects of traditional motorised transport (physical inactivity, air pollution, traffic congestion) and achieves sustainability goals. 
 As an active form of mobility, bicycling improves physical and mental health and has long-term public health benefits.
 However, there are a number of barriers that prevent people from riding a bike, including fears about riding alongside motor vehicle traffic and the lack of safe and appropriate bicycling infrastructure. 
-For the strategic installation of safer bicycling infrastructure or the improvement of existing infrastructure, rigorous evidence-informed scientific studies are necessary, which in turn rely on high-quality bicycling data, which is scarce.
+For the strategic installation of safer cycling infrastructure or the improvement of existing infrastructure, rigorous evidence-informed scientific studies are necessary, which in turn rely on high-quality bicycling data, which is scarce.
 
-In this regard, one of the prerequisites is understanding the different types of bicycling infrastructure that exist in an urban area and create an inventory dataset that can form the basis of future bicycling-related research.
+In this regard, one of the prerequisites is understanding the different types of cycling infrastructure that exist in an urban area and create an inventory dataset that can form the basis of future cycling-related research.
 [OpenStreetMap](https://www.openstreetmap.org/#map=10/-37.9524/145.0806) (OSM) is a valuable open-source map database that contains transport infrastructure data among other things and has spatial coverage for almost the entire planet.
 Hence, it is used extensively by researchers and planners and it helps develop methods that are transferable and thus can be replicated irrespective of the study area.
 We, the [Sustainable Mobility and Safety Research Group](https://www.monash.edu/medicine/sphpm/units/traumaepi/sustainable-mobility-and-safety-research-group) (SMSR) at Monash University, Australia, have developed a classification process to classify existing bicycling infrastructure across Greater Melbourne, Australia.
